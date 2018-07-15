@@ -1,0 +1,29 @@
+---
+# tasks file for virt-host management access configuration
+
+- name: Create virtmgr user to connect both mgmt workstation and vagrant to remote virt host
+  become: true
+  user:
+    state: present
+    name: virtmgr
+    shell: /bin/bash
+    comment: Virtualization manager
+    groups: libvirtd
+
+- name: Set passwordless sudo for virtmgr user
+  become: true
+  template:
+    src: sudoersd.j2
+    dest: /etc/sudoers.d/virtmgr
+    owner: root
+    group: root
+    mode: 0440
+  with_items:
+    - virtmgr
+
+- name: Set SSH key for virtmgr user
+  become: true
+  authorized_key:
+    state: present
+    user: virtmgr
+    key: "{{ lookup('file', virt_user_public_key) }}"

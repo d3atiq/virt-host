@@ -1,0 +1,4 @@
+---
+# defaults file for virt-host
+virt_user_public_key: ~/.ssh/id_rsa.pub
+

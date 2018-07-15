@@ -1,0 +1,45 @@
+---
+# tasks file for virt-host package installation
+
+- name: Update apt repositories cache
+  become: true
+  apt:
+    update_cache: yes
+
+- name: Install apt network packages
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - bridge-utils
+    - openssh-server
+
+- name: Install apt filesystem packages
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - gdisk
+    - zfsutils-linux
+
+- name: Install apt virtualization packages
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - qemu-kvm
+    - libvirt-bin
+    - virtinst
+    - ovmf
+
+- name: Install apt ansible support packages
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python-lxml
+
