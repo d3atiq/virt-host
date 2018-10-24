@@ -9,37 +9,23 @@
 - name: Install apt network packages
   become: true
   apt:
-    name: "{{ item }}"
+    name: [ bridge-utils, openssh-server ]
     state: present
-  with_items:
-    - bridge-utils
-    - openssh-server
 
 - name: Install apt filesystem packages
   become: true
   apt:
-    name: "{{ item }}"
+    name: [ gdisk, zfsutils-linux ]
     state: present
-  with_items:
-    - gdisk
-    - zfsutils-linux
 
 - name: Install apt virtualization packages
   become: true
   apt:
-    name: "{{ item }}"
+    name: [ qemu-kvm, libvirt-bin, virtinst, ovmf ]
     state: present
-  with_items:
-    - qemu-kvm
-    - libvirt-bin
-    - virtinst
-    - ovmf
 
 - name: Install apt ansible support packages
   become: true
   apt:
-    name: "{{ item }}"
+    name: python-lxml
     state: present
-  with_items:
-    - python-lxml
-
