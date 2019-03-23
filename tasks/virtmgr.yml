@@ -8,7 +8,18 @@
     name: "{{ virt_user_name }}"
     shell: /bin/bash
     comment: Virtualization manager
+    groups: libvirtd
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
+
+- name: Create virtualization management user to connect both mgmt workstation and vagrant to remote virt host
+  become: true
+  user:
+    state: present
+    name: "{{ virt_user_name }}"
+    shell: /bin/bash
+    comment: Virtualization manager
     groups: libvirt
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'bionic'
 
 - name: Set passwordless sudo for virtualization management user
   become: true
