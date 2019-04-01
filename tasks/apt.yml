@@ -12,12 +12,6 @@
     name: [ bridge-utils, openssh-server ]
     state: present
 
-- name: Install apt filesystem packages
-  become: true
-  apt:
-    name: [ gdisk, zfsutils-linux ]
-    state: present
-
 - name: Install apt virtualization packages
   become: true
   apt:
