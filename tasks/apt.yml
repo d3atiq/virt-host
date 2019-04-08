@@ -15,7 +15,7 @@
 - name: Install apt virtualization packages
   become: true
   apt:
-    name: [ qemu-kvm, libvirt-bin, virtinst, ovmf ]
+    name: [ qemu-kvm, libvirt-bin, virtinst, ovmf, virt-top ]
     state: present
 
 - name: Install apt ansible support packages
